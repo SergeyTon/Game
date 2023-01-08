@@ -1,0 +1,28 @@
+.game-card {
+    height: 100vh;
+    font-family: 'Open Sans', monospace;
+}
+.card-body {
+    background-color: rgb(229, 222, 235);
+}
+.card-header {
+    background-color:rgb(192, 179, 206) ;
+}
+.card-footer {
+    background-color:rgb(192, 179, 206) ;  
+}
+.m-0 {
+    font-family: 'Franklin Gothic Medium';
+}
+#btnRetry {
+    font-family: 'Franklin Gothic Medium';
+    font-size: 1.5em;
+    
+}
+.btn-info, .btn-success {
+    font-style: italic;
+    text-transform: uppercase;
+}
+.btn-info {
+    background-color: rgb(101, 179, 238);
+}
