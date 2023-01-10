@@ -1,8 +1,12 @@
 let minValue = parseInt(prompt('Минимальное значение числа для игры', '0'));
 let maxValue = parseInt(prompt('Максимальное значение числа для игры', '100'));
 
-minValue = (minValue < -999) ? minValue = -999 : minValue;
-maxValue = (maxValue > 999) ? maxValue = 999 : maxValue;
+minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 999 : minValue;
+maxValue = (maxValue > 999) ? maxValue = 999 : (maxValue < -999) ? maxValue = -999 : maxValue;
+
+if (maxValue < minValue) {
+    [maxValue, minValue] = [minValue, maxValue]; 
+}
 
 if (Number.isNaN(maxValue) || Number.isNaN(minValue)) {
     minValue = 0;
@@ -24,8 +28,12 @@ answerField.innerText = `Вы загадали число ${answerNumber }?`;
 document.getElementById('btnRetry').addEventListener('click', function () {
     minValue = parseInt(prompt('Минимальное значение числа для игры', '0'));
     maxValue = parseInt(prompt('Максимальное значение числа для игры', '100'));
-    minValue = (minValue < -999) ? minValue = -999 : minValue;
-    maxValue = (maxValue > 999) ? maxValue = 999 : maxValue;
+    minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 999 : minValue;
+maxValue = (maxValue > 999) ? maxValue = 999 : (maxValue < -999) ? maxValue = -999 : maxValue;
+
+if (maxValue < minValue) {
+    [maxValue, minValue] = [minValue, maxValue]; 
+}
 
 if (Number.isNaN(maxValue) || Number.isNaN(minValue)) {
     minValue = 0;
