@@ -29,7 +29,7 @@ document.getElementById('btnRetry').addEventListener('click', function () {
     minValue = parseInt(prompt('Минимальное значение числа для игры', '0'));
     maxValue = parseInt(prompt('Максимальное значение числа для игры', '100'));
     minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 999 : minValue;
-maxValue = (maxValue > 999) ? maxValue = 999 : (maxValue < -999) ? maxValue = -999 : maxValue;
+    maxValue = (maxValue > 999) ? maxValue = 999 : (maxValue < -999) ? maxValue = -999 : maxValue;
 
 if (maxValue < minValue) {
     [maxValue, minValue] = [minValue, maxValue]; 
