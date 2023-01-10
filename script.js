@@ -5,7 +5,7 @@ minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 9
 maxValue = (maxValue > 999) ? maxValue = 999 : (maxValue < -999) ? maxValue = -999 : maxValue;
 
 if (maxValue < minValue) {
-    [maxValue, minValue] = [minValue, maxValue]; 
+    [maxValue, minValue] = [minValue, maxValue];
 }
 
 if (Number.isNaN(maxValue) || Number.isNaN(minValue)) {
@@ -30,14 +30,14 @@ document.getElementById('btnRetry').addEventListener('click', function () {
     minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 999 : minValue;
     maxValue = (maxValue > 999) ? maxValue = 999 : (maxValue < -999) ? maxValue = -999 : maxValue;
 
-if (maxValue < minValue) {
-    [maxValue, minValue] = [minValue, maxValue]; 
-}
+    if (maxValue < minValue) {
+        [maxValue, minValue] = [minValue, maxValue];
+    }
 
-if (Number.isNaN(maxValue) || Number.isNaN(minValue)) {
-    minValue = 0;
-    maxValue = 100;
-}
+    if (Number.isNaN(maxValue) || Number.isNaN(minValue)) {
+        minValue = 0;
+        maxValue = 100;
+    }
     alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
     answerNumber = Math.floor((minValue + maxValue) / 2);
     orderNumber = 1;
@@ -52,7 +52,7 @@ document.getElementById('btnOver').addEventListener('click', function () {
             const phraseRandom = Math.round(Math.random());
             const answerPhrase = (phraseRandom === 1) ?
                 `Вы загадали неправильное число!\n\u{1F914}` :
-                `Я сдаюсь..\n\u{1F92F}`;
+                `Вы меня обманываете...\n\u{1F92F}`;
             answerField.innerText = answerPhrase;
             gameRun = false;
         } else {
@@ -65,7 +65,7 @@ document.getElementById('btnOver').addEventListener('click', function () {
                 `Возможно это ${answerNumber }?`,
                 `Похоже, Ваше число ${answerNumber }?`,
             ];
-                answerField.innerText = askRandom[Math.round(Math.random() * 2)];
+            answerField.innerText = askRandom[Math.round(Math.random() * 2)];
 
 
         }
@@ -73,11 +73,11 @@ document.getElementById('btnOver').addEventListener('click', function () {
 })
 document.getElementById('btnLess').addEventListener('click', function () {
     if (gameRun) {
-        if (maxValue === minValue) {
+        if (minValue === maxValue || minValue == answerNumber) {
             const phraseRandom = Math.round(Math.random());
             const answerPhrase = (phraseRandom === 1) ?
                 `Вы загадали неправильное число!\n\u{1F914}` :
-                `Я сдаюсь..\n\u{1F92F}`;
+                `Вы меня обманываете...\n\u{1F92F}`;
 
             answerField.innerText = answerPhrase;
             gameRun = false;
@@ -91,7 +91,7 @@ document.getElementById('btnLess').addEventListener('click', function () {
                 `Возможно это ${answerNumber }?`,
                 `Похоже, Ваше число ${answerNumber }?`,
             ];
-                answerField.innerText = askRandom[Math.round(Math.random() * 2)];
+            answerField.innerText = askRandom[Math.round(Math.random() * 2)];
 
         }
     }
