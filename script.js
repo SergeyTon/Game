@@ -24,7 +24,6 @@ const answerField = document.getElementById('answerField');
 orderNumberField.innerText = orderNumber;
 answerField.innerText = `Вы загадали число ${answerNumber }?`;
 
-
 document.getElementById('btnRetry').addEventListener('click', function () {
     minValue = parseInt(prompt('Минимальное значение числа для игры', '0'));
     maxValue = parseInt(prompt('Максимальное значение числа для игры', '100'));
