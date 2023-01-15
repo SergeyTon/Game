@@ -1,32 +1,14 @@
-let minValue = parseInt(prompt('Минимальное значение числа для игры', '0'));
-let maxValue = parseInt(prompt('Максимальное значение числа для игры', '100'));
-
-minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 999 : minValue;
-maxValue = (maxValue > 999) ? maxValue = 999 : (maxValue < -999) ? maxValue = -999 : maxValue;
-
-if (maxValue < minValue) {
-    [maxValue, minValue] = [minValue, maxValue];
-}
-
-if (Number.isNaN(maxValue) || Number.isNaN(minValue)) {
-    minValue = 0;
-    maxValue = 100;
-}
-
-alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
-let answerNumber = Math.floor((minValue + maxValue) / 2);
-let orderNumber = 1;
-let gameRun = true;
-
-const orderNumberField = document.getElementById('orderNumberField');
-const answerField = document.getElementById('answerField');
-
-orderNumberField.innerText = orderNumber;
-answerField.innerText = `Вы загадали число ${answerNumber }?`;
-
-document.getElementById('btnRetry').addEventListener('click', function () {
-    minValue = parseInt(prompt('Минимальное значение числа для игры', '0'));
-    maxValue = parseInt(prompt('Максимальное значение числа для игры', '100'));
+let minValue;
+let maxValue;
+let gameRun;
+let orderNumber;
+let buttonStart = document.getElementById('btnStart');
+buttonStart.addEventListener('click', function () {
+    const inputWindowMin = document.getElementById('inputWindowMin').value;
+    const inputWindowMax = document.getElementById('inputWindowMax').value;
+    const windowText = document.getElementById('windowText');
+    minValue = parseInt(inputWindowMin);
+    maxValue = parseInt(inputWindowMax);
     minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 999 : minValue;
     maxValue = (maxValue > 999) ? maxValue = 999 : (maxValue < -999) ? maxValue = -999 : maxValue;
 
@@ -38,12 +20,71 @@ document.getElementById('btnRetry').addEventListener('click', function () {
         minValue = 0;
         maxValue = 100;
     }
-    alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
-    answerNumber = Math.floor((minValue + maxValue) / 2);
+
+    windowText.innerText = `Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`;
+    let answerNumber = Math.floor((minValue + maxValue) / 2);
     orderNumber = 1;
     gameRun = true;
+    const orderNumberField = document.getElementById('orderNumberField');
+    const answerField = document.getElementById('answerField');
     orderNumberField.innerText = orderNumber;
-    answerField.innerText = `Вы загадали число ${answerNumber }?`;
+    
+    let units = ['', 'один', 'два', 'три', 'четыре', 'пять', 'шесть','семь', 'восемь', 'девять'];
+    let teens = ['', 'десять', 'одинадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать','шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'];
+    let dozens = ['', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят','восемьдесят', 'девяносто'];
+    let hundreds = ['', 'сто', 'двести', 'триста', 'четыреста', 'пятьсот', 'шестьсот', 'семьсот', 'восемьсот', 'девятьсот'];
+    
+    function numberToText() {            // преобразование числа из цифр в слова в пределах от -999 до 999.
+        let number = Math.abs(answerNumber);
+        let text = '';
+        if (number == 0) {
+            text = 'ноль';
+            return text;
+        }
+    
+        if (number <= 9) {
+            return units[Math.floor(Math.abs(number) / 1)];
+        }
+    
+        if (number > 9 && number < 20) {
+            return teens[Math.floor(number / 10 + number % 10)];
+        }
+    
+        if (number >= 20 && number <= 99) {
+            return dozens[(Math.floor(number / 10)) - 1] + " " + units[Math.floor(number % 10)];
+        }
+    
+        if (number >= 100 && number <= 999) {
+            return hundreds[Math.floor(number / 100)] + " " + numberToTextHundreds();
+        }
+    }
+    
+    function numberToTextHundreds() { // остаток от сотого числа для последующего присоединения к функции numberToText() расчитывающей сотни hundreds.
+        let unitsTeensDozens = Math.abs(answerNumber) % 100;
+        
+        if (unitsTeensDozens <= 9) {
+            return units[Math.floor(unitsTeensDozens / 1)];
+        }
+    
+        if (unitsTeensDozens > 9 && unitsTeensDozens < 20) {
+            return teens[(Math.floor(unitsTeensDozens / 10)) + (unitsTeensDozens % 10)];
+        }
+    
+        if (unitsTeensDozens >= 20 && unitsTeensDozens <= 99) {
+            return dozens[(Math.floor(unitsTeensDozens / 10)) - 1] + " " + units[Math.floor(unitsTeensDozens % 10)];
+        }
+    }
+    
+    orderNumberField.innerText = orderNumber; 
+    answerField.innerText = answerNumber >= 0 ? numberToText().length < 20 && answerNumber >= 0 ? `Вы загадали число ${numberToText()}?` : `Вы загадали число ${answerNumber}?`: numberToText().length < 20 ? `Вы загадали число минус ${numberToText()}?` : `Вы загадали число ${answerNumber}?`;
+    
+    
+
+document.getElementById('btnRetray').addEventListener('click', function () {
+   windowText.innerText=`Игра угадайка!!!`;
+    document.getElementById('inputWindowMin').value = `Введите минимальное число`;
+   document.getElementById('inputWindowMax').value = `Введите максимальное число`;
+    gameRun = false;
 })
 
 document.getElementById('btnOver').addEventListener('click', function () {
@@ -59,13 +100,15 @@ document.getElementById('btnOver').addEventListener('click', function () {
             minValue = answerNumber + 1;
             answerNumber = Math.floor((minValue + maxValue) / 2);
             orderNumber++;
-            orderNumberField.innerText = orderNumber;
+        orderNumberField.innerText = orderNumber;
             let askRandom = [
-                `Вы загадали число ${answerNumber }?`,
-                `Возможно это ${answerNumber }?`,
-                `Похоже, Ваше число ${answerNumber }?`,
+                `Вы загадали число `,
+                `Возможно это `,
+                `Похоже, Ваше число `,
             ];
-            answerField.innerText = askRandom[Math.round(Math.random() * 2)];
+            let answPrase = askRandom[Math.round(Math.random() * 2)];
+            let answerText = answerNumber >= 0 ? numberToText().length < 20 && answerNumber >= 0 ? ` ${numberToText()}?` : `${answerNumber}?`: numberToText().length < 20 ? `минус ${numberToText()}?` : `${answerNumber}?`;
+            answerField.innerText = (answPrase + answerText);
 
 
         }
@@ -87,11 +130,13 @@ document.getElementById('btnLess').addEventListener('click', function () {
             orderNumber++;
             orderNumberField.innerText = orderNumber;
             let askRandom = [
-                `Вы загадали число ${answerNumber }?`,
-                `Возможно это ${answerNumber }?`,
-                `Похоже, Ваше число ${answerNumber }?`,
+                `Вы загадали число `,
+                `Возможно это `,
+                `Похоже, Ваше число `,
             ];
-            answerField.innerText = askRandom[Math.round(Math.random() * 2)];
+           let answPrase = askRandom[Math.round(Math.random() * 2)];
+            let answerText = answerNumber >= 0 ? numberToText().length < 20 && answerNumber >= 0 ? ` ${numberToText()}?` : `${answerNumber}?`: numberToText().length < 20 ? `минус ${numberToText()}?` : `${answerNumber}?`;
+            answerField.innerText = (answPrase + answerText);
 
         }
     }
@@ -108,4 +153,5 @@ document.getElementById('btnEqual').addEventListener('click', function () {
         gameRun = false;
 
     }
+})
 })
