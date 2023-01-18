@@ -81,9 +81,9 @@ buttonStart.addEventListener('click', function () {
     
 
 document.getElementById('btnRetray').addEventListener('click', function () {
-   windowText.innerText=`Игра угадайка!!!`;
-    document.getElementById('inputWindowMin').value = `Введите минимальное число`;
-   document.getElementById('inputWindowMax').value = `Введите максимальное число`;
+   windowText.innerText=`Попробуем ещё?`;
+    document.getElementById('inputWindowMin').value = ``;
+   document.getElementById('inputWindowMax').value = ``;
     gameRun = false;
 })
 
