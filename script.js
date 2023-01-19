@@ -10,14 +10,14 @@ buttonStart.addEventListener('click', function startGame() {                    
     minValue = parseInt(inputWindowMin);
     maxValue = parseInt(inputWindowMax);
 
-    minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 999 : minValue; //проверка на допустимые числа и замена NaN на числа
+    minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 999 : minValue; //проверка на допустимые числа 
     maxValue = (maxValue > 999) ? maxValue = 999 : (maxValue < -999) ? maxValue = -999 : maxValue;
 
     if (maxValue < minValue) {
         [maxValue, minValue] = [minValue, maxValue];
     }
 
-    if (Number.isNaN(maxValue) || Number.isNaN(minValue)) {
+    if (Number.isNaN(maxValue) || Number.isNaN(minValue)) {           // замена Nan на числа
        minValue = 0;
        maxValue = 100;
     }
