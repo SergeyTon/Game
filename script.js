@@ -3,13 +3,14 @@ let maxValue;
 let gameRun;
 let orderNumber;
 let buttonStart = document.getElementById('btnStart');
-buttonStart.addEventListener('click', function () {
-    const inputWindowMin = document.getElementById('inputWindowMin').value;
+buttonStart.addEventListener('click', function startGame() {                     // запускаем кнопку старт
+    const inputWindowMin = document.getElementById('inputWindowMin').value;         //вводим минимальное и максимальное значение
     const inputWindowMax = document.getElementById('inputWindowMax').value;
     const windowText = document.getElementById('windowText');
     minValue = parseInt(inputWindowMin);
     maxValue = parseInt(inputWindowMax);
-    minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 999 : minValue;
+
+    minValue = (minValue < -999) ? minValue = -999 : (minValue > 999) ? minValue = 999 : minValue; //проверка на допустимые числа и замена NaN на числа
     maxValue = (maxValue > 999) ? maxValue = 999 : (maxValue < -999) ? maxValue = -999 : maxValue;
 
     if (maxValue < minValue) {
@@ -17,8 +18,8 @@ buttonStart.addEventListener('click', function () {
     }
 
     if (Number.isNaN(maxValue) || Number.isNaN(minValue)) {
-        minValue = 0;
-        maxValue = 100;
+       minValue = 0;
+       maxValue = 100;
     }
 
     windowText.innerText = `Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`;
@@ -28,7 +29,7 @@ buttonStart.addEventListener('click', function () {
     const orderNumberField = document.getElementById('orderNumberField');
     const answerField = document.getElementById('answerField');
     orderNumberField.innerText = orderNumber;
-    
+  
     let units = ['', 'один', 'два', 'три', 'четыре', 'пять', 'шесть','семь', 'восемь', 'девять'];
     let teens = ['', 'десять', 'одинадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать','шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'];
     let dozens = ['', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят','восемьдесят', 'девяносто'];
@@ -78,16 +79,17 @@ buttonStart.addEventListener('click', function () {
     orderNumberField.innerText = orderNumber; 
     answerField.innerText = answerNumber >= 0 ? numberToText().length < 20 && answerNumber >= 0 ? `Вы загадали число ${numberToText()}?` : `Вы загадали число ${answerNumber}?`: numberToText().length < 20 ? `Вы загадали число минус ${numberToText()}?` : `Вы загадали число ${answerNumber}?`;
     
+    document.getElementById('btnRetray').addEventListener('click', function () {
     
-
-document.getElementById('btnRetray').addEventListener('click', function () {
-   windowText.innerText=`Попробуем ещё?`;
-    document.getElementById('inputWindowMin').value = ``;
-   document.getElementById('inputWindowMax').value = ``;
-    gameRun = false;
-})
-
-document.getElementById('btnOver').addEventListener('click', function () {
+        document.getElementById('inputWindowMin').value = ``;
+       document.getElementById('inputWindowMax').value = ``;
+       //orderNumber = 1;
+      // orderNumberField.innerText = orderNumber;
+        gameRun = true;
+         startGame();
+    })
+     
+    document.getElementById('btnOver').addEventListener('click', function () {
     if (gameRun) {
         if (minValue === maxValue) {
             const phraseRandom = Math.round(Math.random());
