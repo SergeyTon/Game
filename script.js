@@ -80,13 +80,8 @@ buttonStart.addEventListener('click', function startGame() {                    
     answerField.innerText = answerNumber >= 0 ? numberToText().length < 20 && answerNumber >= 0 ? `Вы загадали число ${numberToText()}?` : `Вы загадали число ${answerNumber}?`: numberToText().length < 20 ? `Вы загадали число минус ${numberToText()}?` : `Вы загадали число ${answerNumber}?`;
     
     document.getElementById('btnRetray').addEventListener('click', function () {
-    
-        document.getElementById('inputWindowMin').value = ``;
-       document.getElementById('inputWindowMax').value = ``;
-       //orderNumber = 1;
-      // orderNumberField.innerText = orderNumber;
-        gameRun = true;
-         startGame();
+    location.reload();
+
     })
      
     document.getElementById('btnOver').addEventListener('click', function () {
